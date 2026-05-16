@@ -1,11 +1,11 @@
 services:
-  api:
+  web:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: node-api
+    container_name: web-api
     ports:
-      - "3000:3000"
+      - "5000:5000"
     environment:
       NODE_ENV: production
     volumes:

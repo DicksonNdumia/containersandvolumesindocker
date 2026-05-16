@@ -1,0 +1,1 @@
+ALTER TABLE "userData" DROP CONSTRAINT "uniqueNameAndAge";

@@ -1,0 +1,1 @@
+ALTER TABLE "userData" ADD COLUMN "location" varchar(250);
