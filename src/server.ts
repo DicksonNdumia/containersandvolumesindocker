@@ -1,3 +1,4 @@
+//configuring interaction with .env secrets
 import "dotenv/config";
 
 import express from "express";
@@ -13,8 +14,7 @@ import {
   userTable,
 } from "./schema/user.sql.ts";
 import { limiter } from "./middleware/helper/limit.ts";
-
-//configuring interaction with .env secrets
+import userRoutes from "./routes/user.routes.ts";
 
 //middlewares section
 const app = express();
@@ -30,14 +30,13 @@ const PORT = process.env.PORT || 3000;
 //inserting our first data
 //
 async function main() {
-  const updatedUser = await db.update(userTable).set({
-    age: 30,
-  });
+  // const updatedUser = await db.update(userTable).set({
+  //   age: 30,
+  // });
   // await db.insert(userPreferences).values({
   //   emailUpdates: true,
   //   userId: "2aab339c-5055-44b8-afec-ee663d436fdf",
   // });
-
   // await db.insert(userTable).values({
   //   name: "Mnyeri",
   //   age: 31,
@@ -47,55 +46,55 @@ async function main() {
   // });
   // const user = await db.query.userTable.findMany();
   // console.log(user);
-  //
-  //   await db.delete(userTable);
-  //   const newUser = await db
-  //     .insert(userTable)
-  //     .values([
-  //       {
-  //         name: "kyle",
-  //         age: 29,
-  //         email: "test@gmail.com",
-  //       },
-  //       { name: "sally", email: "sally@email.com", age: 33 },
-  //     ])
-  //     .returning({
-  //       id: userTable.id,
-  //       userName: userTable.name,
-  //     })
-  //     .onConflictDoUpdate({
-  //       target: userTable.email,
-  //       set: { name: "updated name" },
-  //     });
+  // await db.delete(userTable);
+  // const newUser = await db
+  //   .insert(userTable)
+  //   .values([
+  //     {
+  //       name: "kyle",
+  //       age: 29,
+  //       email: "test@gmail.com",
+  //     },
+  //     { name: "sally", email: "sally@email.com", age: 33 },
+  //   ])
+  //   .returning({
+  //     id: userTable.id,
+  //     userName: userTable.name,
+  //   })
+  //   .onConflictDoUpdate({
+  //     target: userTable.email,
+  //     set: { name: "updated name" },
+  //   });
   // console.log(newUser);
-
   // const gettingData = await db.query.userTable.findMany({
   //   columns: { email: true, name: true },
   //   extras: {
   //     lowerCaseName: sql<string>`lower(${userTable.name})`.as("lowerCaseName"),
   //   },
-  //   // //limit: 1,
-  //   // with: {
-  //   //   preferences: true,
-  //   // },
+  //   limit: 1,
+  //   with: {
+  //     preferences: true,
+  //   },
   //   orderBy: (table, { asc }) => asc(table.age),
   // });
   // console.log("Here is the data my friend", gettingData);
-  //
   // const usingSelect = await db
   //   .select({
   //     name: userTable.name,
   //     count: count(userTable.name),
-  //     // emailUpdates: userPreferences.emailUpdates,
+  //     emailUpdates: userPreferences.emailUpdates,
   //   })
   //   .from(userTable)
-  //   .groupBy(userTable.name);
-  // // .leftJoin(userPreferences, eq(userPreferences.userId, userTable.id));
+  //   .groupBy(userTable.name)
+  //   .leftJoin(userPreferences, eq(userPreferences.userId, userTable.id));
   // console.log("Using select: ", usingSelect);
-  const test = await db.select().from(userTable);
-  console.log(test);
+  // const test = await db.select().from(userTable);
+  // console.log(test);
 }
 main();
+
+//api routes
+app.use("/auth", userRoutes);
 
 //Port listening
 app.listen(PORT, () => {

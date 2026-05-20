@@ -22,6 +22,20 @@
       "when": 1778959422392,
       "tag": "0002_medical_johnny_blaze",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1779087442783,
+      "tag": "0003_early_captain_flint",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1779087479440,
+      "tag": "0004_material_tana_nile",
+      "breakpoints": true
     }
   ]
 }
